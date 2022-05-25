@@ -5,7 +5,7 @@
   João Paulo Jeronimo de Oliveira <br>
   Maria Eduarda Fernandes Lago
 
-###Objetivos
+### Objetivos
 
   Implementou o projeto sem realizar modificações na classe Sculptor nem no struct Voxel
 
