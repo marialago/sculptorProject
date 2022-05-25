@@ -4,7 +4,9 @@
 ### Integrantes do Grupo: <br>
   João Paulo Jeronimo de Oliveira <br>
   Maria Eduarda Fernandes Lago
+
 ###Objetivos
+
   Implementou o projeto sem realizar modificações na classe Sculptor nem no struct Voxel
 
   Implementou, PELO MENOS, oito métodos da classe Sculptor
