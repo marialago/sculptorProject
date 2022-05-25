@@ -5,7 +5,7 @@
 //CONSTRUTOR
 Sculptor::Sculptor(int _nx, int _ny, int _nz)
 {
-    //inicializando os inst�ncias do obj
+    //inicializando os instancias do obj
     nx = _nx;
     ny = _ny;
     nz = _nz;
@@ -14,7 +14,7 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz)
     b = 0;
     a = 0;
 
-    //alocando mem�ria para o ponteiro para voxel
+    //alocando memoria para o ponteiro para voxel
     v  = new Voxel** [nx];
     for (unsigned int i=0; i<nx; i++)
     {
@@ -41,7 +41,7 @@ Sculptor::~Sculptor()
     delete[] v;
 }
 
-//FUN��O AUXILIAR PARA INICIALIZAR A MATRIZ COM 0 PARA isOn
+//FUNCAO AUXILIAR PARA INICIALIZAR A MATRIZ COM 0 PARA isOn
 void Sculptor::matrizIgualZero(Voxel ***_v)
 {
     for(unsigned int i=0; i<nx; i++)
@@ -62,7 +62,7 @@ void Sculptor::matrizIgualZero(Voxel ***_v)
 
 void Sculptor::putVoxel(int x, int y, int z)
 {
-    //VERIFICAR SE OS VALORES DO PONTO S�O V�LIDOS
+    //VERIFICAR SE OS VALORES DO PONTO SAO VALIDOS
     verificaPonto(x, nx);
     verificaPonto(y, ny);
     verificaPonto(z, nz);
@@ -76,7 +76,7 @@ void Sculptor::putVoxel(int x, int y, int z)
 
 }
 
-//FUN��O AUXILIAR PARA VERIFICAR SE O PONTO EST� DENTRO DO TAMNHO DA MATRIZ
+//FUNCAO AUXILIAR PARA VERIFICAR SE O PONTO ESTA DENTRO DO TAMNHO DA MATRIZ
 void Sculptor::verificaPonto(int &p, int np)
 {
     if(p > np){
