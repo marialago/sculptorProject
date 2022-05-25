@@ -31,7 +31,7 @@ public:
   void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
   void writeOFF(const char* filename);
 
-  //fun��es adicionais
+  //funcoees adicionais
   void matrizIgualZero(Voxel ***_v);
   void verificaPonto(int &p, int np);
   void imprimeMatriz();
