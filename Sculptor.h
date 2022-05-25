@@ -1,7 +1,6 @@
 #ifndef SCULPTOR_H
 #define SCULPTOR_H
 
-
 #ifndef PROJETOESCULTOR_H_INCLUDED
 #define PROJETOESCULTOR_H_INCLUDED
 
@@ -32,7 +31,7 @@ public:
   void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
   void writeOFF(const char* filename);
 
-  //funções adicionais
+  //funï¿½ï¿½es adicionais
   void matrizIgualZero(Voxel ***_v);
   void verificaPonto(int &p, int np);
   void imprimeMatriz();
