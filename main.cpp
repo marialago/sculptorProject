@@ -7,9 +7,6 @@ int main()
     m.putVoxel(1, 1, 1);
     m.putVoxel(2, 2, 2);
     m.putVoxel(1, 1, 2);
-    m.cutVoxel(1, 1, 1);
-    m.cutVoxel(2, 2, 2);
-    m.cutVoxel(1, 1, 2);
     m.imprimeMatriz();
 
     m.~Sculptor();

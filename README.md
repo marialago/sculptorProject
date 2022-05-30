@@ -7,13 +7,13 @@
 
 ### Objetivos
 
-  Implementou o projeto sem realizar modificações na classe Sculptor nem no struct Voxel
+  Implementou o projeto sem realizar modificações na classe Sculptor nem no struct Voxel :heavy_check_mark:
 
-  Implementou, PELO MENOS, oito métodos da classe Sculptor
+  Implementou, PELO MENOS, oito métodos da classe Sculptor 
 
   Realizou a alocação dinâmica da matriz de voxels "v" :heavy_check_mark:
 
-  O projeto desenvolvido compila sem erros.
+  O projeto desenvolvido compila sem erros. 
 
   O projeto desenvolvido executa sem erros.
 
