@@ -13,7 +13,7 @@
 
   Realizou a alocação dinâmica da matriz de voxels "v" :heavy_check_mark:
 
-  O projeto desenvolvido compila sem erros. 
+  O projeto desenvolvido compila sem erros. :heavy_check_mark:
 
   O projeto desenvolvido executa sem erros. :heavy_check_mark:
 
