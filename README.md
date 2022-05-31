@@ -15,7 +15,7 @@
 
   O projeto desenvolvido compila sem erros. 
 
-  O projeto desenvolvido executa sem erros. 
+  O projeto desenvolvido executa sem erros. :heavy_check_mark:
 
   Criou um programa-exemplo para testar as TODAS as funcionalidades que foram implementadas 
 
