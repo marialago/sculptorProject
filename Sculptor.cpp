@@ -1,6 +1,8 @@
 #include "Sculptor.h"
 #include <iostream>
-
+#include <fstream>
+#include <math.h>
+#include <iomanip>
 
 //CONSTRUTOR
 Sculptor::Sculptor(int _nx, int _ny, int _nz)
@@ -90,7 +92,7 @@ void Sculptor::putVoxel(int x, int y, int z)
     {
         z = z-1;
     }
-    
+
     //ESCREVER O VALOR NA POSIÇÃO E CORES.
     v[x][y][z].r = r;
     v[x][y][z].g = g;
@@ -137,14 +139,14 @@ void Sculptor::cutVoxel(int x, int y, int z)
     v[x][y][z].isOn = false;
 }
 
-void putBox(int x0, int x1, int y0, int y1, int z0, int z1)
+void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
-    int aux
+    int aux;
     //VERIFICA OS INTERVALOS DE X
     if(x0 <= 0){
         x0 = 0;
     }
-    
+
     if(x1 >= nx)
     {
         x1 = nx-1;
@@ -197,7 +199,7 @@ void putBox(int x0, int x1, int y0, int y1, int z0, int z1)
         z0 = aux;
     }else{
         z0 = z0;
-        z1 = z1;    
+        z1 = z1;
     }
 
     //ATIVA OS VOXELS NO INTERVALO DO BOX
@@ -214,18 +216,18 @@ void putBox(int x0, int x1, int y0, int y1, int z0, int z1)
                 v[i][j][k].a = a;
             }
         }
-    }    
+    }
 
 }
 
-void cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
+void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
-    int aux
+    int aux;
     //VERIFICA OS INTERVALOS DE X
     if(x0 <= 0){
         x0 = 0;
     }
-    
+
     if(x1 >= nx)
     {
         x1 = nx-1;
@@ -278,7 +280,7 @@ void cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
         z0 = aux;
     }else{
         z0 = z0;
-        z1 = z1;    
+        z1 = z1;
     }
 
     //ATIVA OS VOXELS NO INTERVALO DO BOX
@@ -291,7 +293,61 @@ void cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
                 v[i][j][k].isOn = 0;
             }
         }
-    } 
+    }
+}
+
+void putSphere(int xcenter, int ycenter, int zcenter, int radius){
+    for (int i = -radius; i <= radius; i++)
+            for (int j = -radius; j <= radius; j++)
+                for (int k = -radius; k <= radius; k++)
+                    if (((xcenter + i) < 0 || (xcenter + i) >= nx) || ((ycenter + j) < 0 || (ycenter + j) >= ny) || ((zcenter + k) < 0 || (zcenter + k) >= nz)) {
+                    }
+                    else {
+                        if (i * i + j * j + k * k < radius * radius)
+                            putVoxel(xcenter + i, ycenter + j, zcenter + k);
+                    }
+}
+
+void cutSphere(int xcenter, int ycenter, int zcenter, int radius){
+    for (int i = -radius; i <= radius; i++)
+            for (int j = -radius; j <= radius; j++)
+                for (int k = -radius; k <= radius; k++)
+                    if (((xcenter + i) < 0 || (xcenter + i) >= nx) || ((ycenter + j) < 0 || (ycenter + j) >= ny) || ((zcenter + k) < 0 || (zcenter + k) >= nz)) {
+                    }
+                    else {
+                        if (i * i + j * j + k * k < radius * radius)
+                            cutVoxel(xcenter + i, ycenter + j, zcenter + k);
+                    }
+}
+
+void putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz){
+    double x, y, z;
+
+	for (int i = 0; i < nx; i++)
+		for (int j = 0; j < ny; j++)
+			for (int k = 0; k < nz; k++) {
+				x = ((double)(i - xcenter) * (double)(i - xcenter)) / (rx * rx);
+				y = ((double)(j - ycenter) * (double)(j - ycenter)) / (ry * ry);
+				z = ((double)(k - zcenter) * (double)(k - zcenter)) / (rz * rz);
+
+				if ((x + y + z) < 1)
+					putVoxel(i, j, k);
+			}
+}
+
+void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz){
+    double x, y, z;
+
+	for (int i = 0; i < nx; i++)
+		for (int j = 0; j < ny; j++)
+			for (int k = 0; k < nz; k++) {
+				x = ((double)(i - xcenter) * (double)(i - xcenter)) / (rx * rx);
+				y = ((double)(j - ycenter) * (double)(j - ycenter)) / (ry * ry);
+				z = ((double)(k - zcenter) * (double)(k - zcenter)) / (rz * rz);
+
+				if ((x + y + z) < 1)
+					cutVoxel(i, j, k);
+			}
 }
 
 void Sculptor::writeOFF(const char* offname)
@@ -300,12 +356,7 @@ void Sculptor::writeOFF(const char* offname)
 
     off.open(offname);
 
-    if(!off.is_open())
-    {
-        exit(1);
-    }
-
-    off << "OFF" << std::std::endl;
+    off << "OFF" << std::endl;
 
     int faces = 0;
     int voxel = 0;
@@ -325,8 +376,8 @@ void Sculptor::writeOFF(const char* offname)
     }
 
     //ESCREVE NUMERO DE VERTICES, NUM. DE FACES E ARESTAS(0)
-    off << 8 * voxel << " " << 6 * voxel << " " << 0 << std::std::endl;
-    
+    off << 8 * voxel << " " << 6 * voxel << " " << 0 << std::endl;
+
     //ESCREVE CADA POSIÇÃO DE CADA VERTICE DE CADA VOXEL
     for (int i = 0; i < nx; i++)
     {
@@ -348,9 +399,9 @@ void Sculptor::writeOFF(const char* offname)
             }
         }
     }
-    
-    //MOSTRA COM APENAS UMA CASA DECIMAL 
-    off << fixed << setprecision(1);
+
+    //MOSTRA COM APENAS UMA CASA DECIMAL
+    off << std::fixed << std::setprecision(1);
 
     //DEFINE, DE ACORDO COM A REGRA DA MÃO DIREITA, CADA FACE NO ARQUIVO .
     for (int i = 0; i < nx; i++)
@@ -361,12 +412,12 @@ void Sculptor::writeOFF(const char* offname)
             {
                 if (v[i][j][k].isOn == true)
                 {
-                    off << "4 " << 0 + nFaces * 8 << " " << 3 + nFaces * 8 << " " << 2 + nFaces * 8 << " " << 1 + nFaces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
-                    off << "4 " << 4 + nFaces * 8 << " " << 5 + nFaces * 8 << " " << 6 + nFaces * 8 << " " << 7 + nFaces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
-                    off << "4 " << 0 + nFaces * 8 << " " << 1 + nFaces * 8 << " " << 5 + nFaces * 8 << " " << 4 + nFaces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
-                    off << "4 " << 0 + nFaces * 8 << " " << 4 + nFaces * 8 << " " << 7 + nFaces * 8 << " " << 3 + nFaces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
-                    off << "4 " << 3 + nFaces * 8 << " " << 7 + nFaces * 8 << " " << 6 + nFaces * 8 << " " << 2 + nFaces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
-                    off << "4 " << 1 + nFaces * 8 << " " << 2 + nFaces * 8 << " " << 6 + nFaces * 8 << " " << 5 + nFaces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    off << "4 " << 0 + faces * 8 << " " << 3 + faces * 8 << " " << 2 + faces * 8 << " " << 1 + faces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    off << "4 " << 4 + faces * 8 << " " << 5 + faces * 8 << " " << 6 + faces * 8 << " " << 7 + faces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    off << "4 " << 0 + faces * 8 << " " << 1 + faces * 8 << " " << 5 + faces * 8 << " " << 4 + faces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    off << "4 " << 0 + faces * 8 << " " << 4 + faces * 8 << " " << 7 + faces * 8 << " " << 3 + faces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    off << "4 " << 3 + faces * 8 << " " << 7 + faces * 8 << " " << 6 + faces * 8 << " " << 2 + faces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    off << "4 " << 1 + faces * 8 << " " << 2 + faces * 8 << " " << 6 + faces * 8 << " " << 5 + faces * 8 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
                     faces++;
                 }
             }
@@ -392,10 +443,10 @@ void Sculptor::imprimeMatriz()
         {
             for(unsigned int k=0; k<nz; k++)
             {
-                std::cout<< v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << " " << v[i][j][k].isOn<< std::std::endl;
+                std::cout<< v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << " " << v[i][j][k].isOn<< std::endl;
             }
-            std::cout<<std::std::endl;
+            std::cout<<std::endl;
         }
-    std::cout << std::std::endl;
+    std::cout << std::endl;
     }
 }
