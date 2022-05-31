@@ -27,10 +27,6 @@
 
   Hospedou o projeto no github.com ou em outro repositório. :heavy_check_mark:
 
-se sim, escreva o endereço abaixo do repositório: 
-
-
-
 
 ### Links importantes
 https://agostinhobritojr.github.io/curso/progav-dca1202/escultor.html <br>
