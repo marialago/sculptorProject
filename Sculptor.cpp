@@ -296,7 +296,7 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
     }
 }
 
-void putSphere(int xcenter, int ycenter, int zcenter, int radius){
+void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius){
     for (int i = -radius; i <= radius; i++)
             for (int j = -radius; j <= radius; j++)
                 for (int k = -radius; k <= radius; k++)
@@ -308,7 +308,7 @@ void putSphere(int xcenter, int ycenter, int zcenter, int radius){
                     }
 }
 
-void cutSphere(int xcenter, int ycenter, int zcenter, int radius){
+void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius){
     for (int i = -radius; i <= radius; i++)
             for (int j = -radius; j <= radius; j++)
                 for (int k = -radius; k <= radius; k++)
@@ -317,10 +317,11 @@ void cutSphere(int xcenter, int ycenter, int zcenter, int radius){
                     else {
                         if (i * i + j * j + k * k < radius * radius)
                             cutVoxel(xcenter + i, ycenter + j, zcenter + k);
+                            //v[i][j][k].isOn = false;
                     }
 }
 
-void putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz){
+void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz){
     double x, y, z;
 
 	for (int i = 0; i < nx; i++)
@@ -335,7 +336,7 @@ void putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz)
 			}
 }
 
-void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz){
+void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz){
     double x, y, z;
 
 	for (int i = 0; i < nx; i++)
