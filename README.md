@@ -23,7 +23,7 @@
 
   O arquivo com a escultura gerada pode ser visualizado em algum software disponível
 
-  Documentou todas as classes desenvolvidas com doxygen
+  Documentou todas as classes desenvolvidas com doxygen :heavy_check_mark:
 
   Hospedou o projeto no github.com ou em outro repositório. :heavy_check_mark:
 se sim, escreva o endereço abaixo do repositório: 
