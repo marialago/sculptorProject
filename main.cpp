@@ -13,6 +13,7 @@ int main()
     // CORPO
     bola.setColor(0.5, 0.5, 0.5, 1);
     bola.putBox(14, 80, 40, 75, 20, 80);
+    bola.cutBox(14, 80, 40, 75, 20, 25);
 
     // OLHOS
     bola.setColor(1, 1, 1, 1);

@@ -480,18 +480,3 @@ void Sculptor::setColor(float _r, float _g, float _b, float _alpha)
     a = _alpha;
 }
 
-void Sculptor::imprimeMatriz()
-{
-    for (unsigned int i = 0; i < nx; i++)
-    {
-        for (unsigned int j = 0; j < ny; j++)
-        {
-            for (unsigned int k = 0; k < nz; k++)
-            {
-                std::cout << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << " " << v[i][j][k].isOn << std::endl;
-            }
-            std::cout << std::endl;
-        }
-        std::cout << std::endl;
-    }
-}
