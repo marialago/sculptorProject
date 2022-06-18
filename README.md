@@ -9,7 +9,7 @@
 
   Implementou o projeto sem realizar modificações na classe Sculptor nem no struct Voxel :heavy_check_mark:
 
-  Implementou, PELO MENOS, oito métodos da classe Sculptor 
+  Implementou, PELO MENOS, oito métodos da classe Sculptor :heavy_check_mark:
 
   Realizou a alocação dinâmica da matriz de voxels "v" :heavy_check_mark:
 
