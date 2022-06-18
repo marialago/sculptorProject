@@ -350,15 +350,10 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
     for (int i = -radius; i <= radius; i++)
         for (int j = -radius; j <= radius; j++)
             for (int k = -radius; k <= radius; k++)
-                if (((xcenter + i) < 0 || (xcenter + i) >= nx) || ((ycenter + j) < 0 || (ycenter + j) >= ny) || ((zcenter + k) < 0 || (zcenter + k) >= nz))
-                {
-                }
-                else
-                {
+                
                     if (i * i + j * j + k * k < radius * radius)
                         cutVoxel(xcenter + i, ycenter + j, zcenter + k);
-                    // v[i][j][k].isOn = false;
-                }
+                    //v[i][j][k].isOn = false;
 }
 
 void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz)
