@@ -335,14 +335,8 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius)
     for (int i = -radius; i <= radius; i++)
         for (int j = -radius; j <= radius; j++)
             for (int k = -radius; k <= radius; k++)
-                if (((xcenter + i) < 0 || (xcenter + i) >= nx) || ((ycenter + j) < 0 || (ycenter + j) >= ny) || ((zcenter + k) < 0 || (zcenter + k) >= nz))
-                {
-                }
-                else
-                {
-                    if (i * i + j * j + k * k < radius * radius)
-                        putVoxel(xcenter + i, ycenter + j, zcenter + k);
-                }
+                if (i * i + j * j + k * k < radius * radius)
+                    putVoxel(xcenter + i, ycenter + j, zcenter + k);
 }
 
 void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
@@ -350,10 +344,10 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
     for (int i = -radius; i <= radius; i++)
         for (int j = -radius; j <= radius; j++)
             for (int k = -radius; k <= radius; k++)
-                
-                    if (i * i + j * j + k * k < radius * radius)
-                        cutVoxel(xcenter + i, ycenter + j, zcenter + k);
-                    //v[i][j][k].isOn = false;
+
+                if (i * i + j * j + k * k < radius * radius)
+                    cutVoxel(xcenter + i, ycenter + j, zcenter + k);
+    // v[i][j][k].isOn = false;
 }
 
 void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz)
@@ -474,4 +468,3 @@ void Sculptor::setColor(float _r, float _g, float _b, float _alpha)
     b = _b;
     a = _alpha;
 }
-
